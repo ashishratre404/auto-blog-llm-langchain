@@ -44,8 +44,14 @@ blog_chain = SequentialChain(
     verbose=True
 )
 
-def generate_blog(topic: str):
-    return blog_chain.invoke({"topic": topic})
+def generate_blog_from_topic(topic: str):
+    result = blog_chain.invoke({"topic": topic})
+    return {
+        "title": result["title"],
+        "intro": result["intro"],
+        "mainContent": result["main"],
+        "summary": result["summary"],
+    }
 
-response = generate_blog("The Future of AI in Everyday Life")
-print(response)
+# response = generate_blog_from_topic("The Future of AI in Everyday Life")
+# print(response)
